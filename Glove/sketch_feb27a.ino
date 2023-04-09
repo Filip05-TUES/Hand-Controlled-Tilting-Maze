@@ -1,8 +1,4 @@
 #include <Adafruit_MPU6050.h>
-#include <Adafruit_Sensor.h>
-#include <Wire.h>
-#include <Servo.h>
-#include <SPI.h>
 #include <nRF24L01.h>
 #include <RF24.h>
 
@@ -35,9 +31,6 @@ void loop() {
   sensors_event_t a, g, temp;
   srituhobby.getEvent(&a, &g, &temp);
 
-  //double variableX = (a.acceleration.x + 10) / 20;
-  //double variableY = (a.acceleration.y + 10) / 20;
-
   int valueX = map(a.acceleration.x,  -10, 10, 180, 0);
   int valueY = map(a.acceleration.y,  -10, 10, 180, 0);
 
@@ -47,7 +40,5 @@ void loop() {
   prevY = smoothY;
   
   int angles[] = {smoothX, smoothY};
-  Serial.println(smoothX);
   radio.write(&angles, sizeof(angles));
-  //delay(1000);
 }

@@ -1,8 +1,4 @@
-#include <Adafruit_MPU6050.h>
-#include <Adafruit_Sensor.h>
-#include <Wire.h>
 #include <Servo.h>
-#include <SPI.h>
 #include <nRF24L01.h>
 #include <RF24.h>
 
@@ -27,7 +23,8 @@ void loop() {
   if (radio.available()) {
     int angles[2];
     radio.read(&angles, sizeof(angles));
-    //servo.write(angles[0]);
+    Serial.println(angles[1]);
+    servo.write(angles[0]);
     servo2.write(angles[1]);
   }
 }
