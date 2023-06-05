@@ -8,7 +8,6 @@ Servo servo;
 Servo servo2;
 
 void setup(void) {
-  Serial.begin(9600);
   radio.begin();
   radio.openReadingPipe(0, address);
   radio.setPALevel(RF24_PA_MIN);
@@ -23,7 +22,6 @@ void loop() {
   if (radio.available()) {
     int angles[2];
     radio.read(&angles, sizeof(angles));
-    Serial.println(angles[1]);
     servo.write(angles[0]);
     servo2.write(angles[1]);
   }
